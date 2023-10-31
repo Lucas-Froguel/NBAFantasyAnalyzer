@@ -4,6 +4,8 @@ This system was designed to analyze and predict NBA fantasy scores.
 
 # Architecture
 
+![Architecture.png](Architecture.png)
+
 This system ingest, process and displays data. We ingest data from the NBA API and from the ESPN Fantasy API. 
 This data is stored in a data lake, built in mongodb. This data is later processed and stored in a mini data-warehouse,
 that is also hosted on the same mongodb (there is no need for nothing more, given the scale of this application for now). 
