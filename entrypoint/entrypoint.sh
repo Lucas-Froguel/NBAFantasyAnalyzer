@@ -15,8 +15,8 @@ exit_with_error(){
 }
 
 start_server(){
-    echo "Starting server..."
-    DEBUG=True python manage.py runserver $S_ADDRESS:$PORT
+    echo "Starting analyzes..."
+    DEBUG=True python main.py
     exit_with_error
 }
 
@@ -25,15 +25,9 @@ wait_for_db(){
     sleep 5
 }
 
-start_cron(){
-  echo "Starting cron..."
-  cron
-  sleep 1
-}
 
 default_start(){
     wait_for_db
-    start_cron
     start_server
     exit_with_error
 }
@@ -53,14 +47,6 @@ do
     case $arg in
         -T|--test)
         PYTEST=1
-        shift
-        ;;
-        -p=*|--port=*)
-        PORT="${arg#*=}"
-        shift
-        ;;
-        -a=*|--address=*)
-        S_ADDRESS="${arg#*=}"
         shift
         ;;
         *)

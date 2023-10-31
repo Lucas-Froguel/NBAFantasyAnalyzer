@@ -3,7 +3,7 @@ from pymongo.results import InsertOneResult
 from nba_fantasy_analyzer.mongodb.queries.general_queries import (
     get_one_document_query,
     insert_one_document_query,
-    bulk_insert_documents_query,
+    insert_many_documents_query,
 )
 
 
@@ -69,6 +69,6 @@ def test_bulk_insert_data_query(fake, monkeypatch):
         "nba_fantasy_analyzer.mongodb.queries.general_queries.MongoConnection.bulk_insert_documents",
         mock_bulk_insert_documents,
     )
-    response = bulk_insert_documents_query(database=db, collection=col, data=objects)
+    response = insert_many_documents_query(database=db, collection=col, data=objects)
 
     assert response is None

@@ -1,8 +1,8 @@
 
 import pymongo
-from django.conf import settings
 from dataclasses import dataclass
 
+import nba_fantasy_analyzer.settings as settings
 from nba_fantasy_analyzer.exceptions import DatabaseError
 
 

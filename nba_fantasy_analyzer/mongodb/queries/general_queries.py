@@ -1,5 +1,6 @@
 from nba_fantasy_analyzer.exceptions import DatabaseError, ItemNotFound
 from nba_fantasy_analyzer.mongodb.mongodb import MongoConnection
+from nba_fantasy_analyzer.utils.format_bson_data import format_to_bson
 
 
 def get_one_document_query(
@@ -21,11 +22,28 @@ def get_one_document_query(
             raise ItemNotFound(details=str(query))
 
 
+def get_many_documents_query(
+    database: str = None,
+    collection: str = None,
+    query: dict = None,
+    projection: dict = {},
+    raise_exception: bool = True
+):
+    with MongoConnection() as mongo:
+        col = mongo.get_db_collection(database, collection)
+        items = col.find(query, projection=projection)
+        if items:
+            return list(items)
+        if raise_exception:
+            raise ItemNotFound(details=str(query))
+
+
 def insert_one_document_query(
     database: str = None, collection: str = None, data: dict = None
 ):
     try:
         with MongoConnection() as mongo:
+            data = format_to_bson(data)
             obj = mongo.insert_document(
                 db_name=database,
                 collection_name=collection,
@@ -36,11 +54,12 @@ def insert_one_document_query(
         raise DatabaseError(details=str(e))
 
 
-def bulk_insert_documents_query(
+def insert_many_documents_query(
     database: str = None, collection: str = None, data: list = None
 ):
     try:
         with MongoConnection() as mongo:
+            data = format_to_bson(data)
             mongo.bulk_insert_documents(
                 db_name=database,
                 collection_name=collection,

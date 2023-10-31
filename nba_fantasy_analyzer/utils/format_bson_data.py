@@ -1,5 +1,6 @@
 import bson
 import copy
+import datetime
 from decimal import Decimal
 from bson.decimal128 import Decimal128
 from uuid import UUID
@@ -31,6 +32,10 @@ def apply_bson_rules(value):
         value = Decimal128(str(value))
     elif isinstance(value, UUID):
         value = bson.Binary.from_uuid(value)
+    elif isinstance(value, datetime.date):
+        value = str(value)
+    elif isinstance(value, datetime.datetime):
+        value = str(value)
 
     return value
 
