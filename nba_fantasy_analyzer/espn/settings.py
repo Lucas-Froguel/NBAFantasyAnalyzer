@@ -1,0 +1,9 @@
+
+from nba_fantasy_analyzer.settings import config
+
+NBA_FANTASY_LEAGUE_ID = config("NBA_FANTASY_LEAGUE_ID")
+NBA_FANTASY_SEASON_ID = config("NBA_FANTASY_SEASON_ID")
+NBA_FANTASY_ESPNS2 = config("NBA_FANTASY_ESPNS2")
+NBA_FANTASY_SWID = config("NBA_FANTASY_SWID")
+
+

@@ -1,5 +1,5 @@
 
-from nba_fantasy_analyzer.settings import MONGODB_NAME, ALL_TEAMS_DAILY_DATA_COLLECTION, ALL_TEAMS_WEEKLY_DATA_COLLECTION
+from nba_fantasy_analyzer.mongodb.settings import MONGODB_NAME, ALL_TEAMS_WEEKLY_DATA_COLLECTION
 from nba_fantasy_analyzer.mongodb.queries.general_queries import get_many_documents_query, get_one_document_query
 
 

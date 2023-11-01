@@ -1,6 +1,6 @@
 # NBA Fantasy Analyzer
 
-This system was designed to analyze and predict NBA fantasy scores. 
+This system was designed to analyze and predict NBA fantasy scores. The code is structured in DDD (domain-driven design).
 
 # Architecture
 

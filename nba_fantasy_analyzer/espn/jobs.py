@@ -1,12 +1,14 @@
 
 import datetime
 
-from nba_fantasy_analyzer.settings import MONGODB_NAME, ALL_TEAMS_DAILY_DATA_COLLECTION, \
+from nba_fantasy_analyzer.mongodb.settings import MONGODB_NAME, ALL_TEAMS_DAILY_DATA_COLLECTION, \
     ALL_TEAMS_WEEKLY_DATA_COLLECTION, MATCHUP_PREDICTION_ESPN_COLLECTION
-from nba_fantasy_analyzer.api.espn import get_all_teams, get_current_week, get_current_matchups
 from nba_fantasy_analyzer.mongodb.queries.general_queries import insert_one_document_query, insert_many_documents_query
-from nba_fantasy_analyzer.mongodb.queries.espn import get_all_teams_weekly_data, get_one_team_weekly_score
-from nba_fantasy_analyzer.utils.espn import get_team_expected_and_projected_points, transform_team_class_in_json
+
+from nba_fantasy_analyzer.espn.api import get_all_teams, get_current_week, get_current_matchups
+from nba_fantasy_analyzer.espn.queries import get_one_team_weekly_score
+from nba_fantasy_analyzer.espn.utils import get_team_expected_and_projected_points, transform_team_class_in_json
+
 from nba_fantasy_analyzer.utils.datetime import get_first_and_last_day_of_week
 
 

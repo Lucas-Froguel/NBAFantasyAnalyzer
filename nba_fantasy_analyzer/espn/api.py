@@ -1,6 +1,6 @@
 
 from espn_api.basketball import League
-from nba_fantasy_analyzer.settings import NBA_FANTASY_LEAGUE_ID, NBA_FANTASY_SEASON_ID, NBA_FANTASY_SWID, \
+from nba_fantasy_analyzer.espn.settings import NBA_FANTASY_LEAGUE_ID, NBA_FANTASY_SEASON_ID, NBA_FANTASY_SWID, \
     NBA_FANTASY_ESPNS2
 
 

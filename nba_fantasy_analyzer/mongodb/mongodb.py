@@ -2,7 +2,7 @@
 import pymongo
 from dataclasses import dataclass
 
-import nba_fantasy_analyzer.settings as settings
+import nba_fantasy_analyzer.mongodb.settings as settings
 from nba_fantasy_analyzer.exceptions import DatabaseError
 
 
