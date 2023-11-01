@@ -3,6 +3,8 @@ from espn_api.basketball import Team, Player
 
 
 def get_team_expected_and_projected_points(team: Team = None, today: date = None, consider_be_out: bool = True) -> float:
+    # TODO:
+    # get realized points as well
     projected_points = 0
     expected_points = 0
     for player in team.roster:

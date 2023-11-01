@@ -8,6 +8,7 @@ from nba_fantasy_analyzer.mongodb.queries.general_queries import insert_one_docu
 from nba_fantasy_analyzer.espn.api import get_all_teams, get_current_week, get_current_matchups
 from nba_fantasy_analyzer.espn.queries import get_one_team_weekly_score
 from nba_fantasy_analyzer.espn.utils import get_team_expected_and_projected_points, transform_team_class_in_json
+from nba_fantasy_analyzer.espn.usecases import process_team_weekly_data
 
 from nba_fantasy_analyzer.utils.datetime import get_first_and_last_day_of_week
 
@@ -33,22 +34,7 @@ def save_all_teams_weekly_data():
     first_day, last_day = get_first_and_last_day_of_week(datetime.date.today())
 
     for team in teams:
-        team_in_json = transform_team_class_in_json(team)
-        team_in_json |= {"week": current_week}
-        team_cumulative_points = {
-            "expected_points": 0,
-            "projected_points": 0
-        }
-        for k in range(7):
-            day = first_day + datetime.timedelta(days=k)
-            team_points = get_team_expected_and_projected_points(
-                team=team, today=day, consider_be_out=False
-            )
-            team_cumulative_points[f"day{k}"] = team_points
-            team_cumulative_points["expected_points"] += team_points["expected_points"]
-            team_cumulative_points["projected_points"] += team_points["projected_points"]
-
-        team_in_json |= team_cumulative_points
+        team_in_json = process_team_weekly_data(team=team, current_week=current_week, first_day=first_day)
 
         insert_one_document_query(
             database=MONGODB_NAME, collection=ALL_TEAMS_WEEKLY_DATA_COLLECTION, data=team_in_json
